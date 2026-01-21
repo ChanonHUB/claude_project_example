@@ -21,10 +21,6 @@ WORKDIR /app
 # Copy published files from build stage
 COPY --from=build /app/publish .
 
-# Install EF Core tools for migrations
-RUN dotnet tool install --global dotnet-ef --version 8.0.8
-ENV PATH="$PATH:/root/.dotnet/tools"
-
 # Expose ports
 EXPOSE 8080
 
