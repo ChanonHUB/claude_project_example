@@ -115,6 +115,13 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// Run database migrations on startup
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    dbContext.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline
 // Enable Swagger in all environments for API testing
 app.UseSwagger();
