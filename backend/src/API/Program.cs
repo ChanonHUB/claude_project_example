@@ -14,12 +14,11 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 
 // Add DbContext
-var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL")
-    ?? builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 if (string.IsNullOrEmpty(connectionString))
 {
-    throw new InvalidOperationException("Database connection string not found. Set DATABASE_URL or ConnectionStrings__DefaultConnection.");
+    throw new InvalidOperationException("Database connection string not found. Set ConnectionStrings__DefaultConnection.");
 }
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
